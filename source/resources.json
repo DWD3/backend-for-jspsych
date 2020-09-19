@@ -1,0 +1,69 @@
+{
+    "Resources": {
+      "ExpResultSDB": {
+       "Type":"AWS::SDB::Domain",
+       "Properties":
+        {
+         "Description":"Simple DB auto-created to store experiment data"
+        }
+      },
+      "upload_result": {
+        "Properties": {
+          "Environment": {
+            "Variables": {
+              "SimpleDBDomainName":{"Ref":"ExpResultSDB"}
+            }
+          }
+        }
+      },
+      "DefaultRole": {
+        "Type": "AWS::IAM::Role",
+        "Properties": {
+          "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Sid": "",
+                "Effect": "Allow",
+                "Principal": {
+                  "Service": "lambda.amazonaws.com"
+                },
+                "Action": "sts:AssumeRole"
+              }
+            ]
+          },
+          "Policies": [
+            {
+              "PolicyName": "DefaultRolePolicy",
+              "PolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Action": [
+                      "logs:CreateLogGroup",
+                      "logs:CreateLogStream",
+                      "logs:PutLogEvents"
+                    ],
+                    "Resource": "arn:aws:logs:*:*:*"
+                  },
+                  {
+                    "Effect": "Allow",
+                    "Action": [
+                      "execute-api:ManageConnections"
+                    ],
+                    "Resource": "arn:aws:execute-api:*:*:*/@connections/*"
+                  },
+                  {
+                    "Effect": "Allow",
+                    "Action": "sdb:*",
+                    "Resource": "*"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }

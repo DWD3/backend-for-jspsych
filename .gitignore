@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+# AWS credential(only contains a alias so not really sensitive information)
+credential.txt
