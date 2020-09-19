@@ -1,6 +1,6 @@
-profile_name = $1
-bucket_name = $2
-stack_name = $3
+profile_name=$1
+bucket_name=$2
+stack_name=$3
 
 export AWS_PROFILE=$profile_name
 

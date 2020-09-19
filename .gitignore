@@ -131,3 +131,7 @@ dmypy.json
 
 # AWS credential(only contains a alias so not really sensitive information)
 credential.txt
+
+# deployment files
+
+out/

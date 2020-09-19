@@ -1,9 +1,8 @@
-from chalice import Chalice
+from chalice import Chalice,Rate
 import boto3
 import os
 
-app = Chalice(app_name='backend')
-
+app = Chalice(app_name='backend-jspsych')
 
 @app.route('/uploadresult',methods=['POST'])
 def upload_result():
